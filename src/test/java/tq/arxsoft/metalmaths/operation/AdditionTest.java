@@ -2,6 +2,8 @@ package tq.arxsoft.metalmaths.operation;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AdditionTest {
@@ -22,6 +24,21 @@ class AdditionTest {
 
     @Test
     void get_3_possible_answers() {
+        //given
+        Addition addition = new Addition(2,2);
+
+        //when
+        List<Integer> answers = addition.getAnswerWithOnlyOneCorrect();
+
+        //then
+        int numberOfCorrectAnswer = 0;
+        for( Integer number : answers ) {
+            if( number.equals(4) ) {
+                numberOfCorrectAnswer++;
+            }
+        }
+
+        assertEquals(numberOfCorrectAnswer, 1);
 
     }
 
