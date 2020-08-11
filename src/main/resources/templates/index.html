@@ -7,6 +7,8 @@
 </head>
 <body>
 <span th:text="${exersice.formula}"></span>
-
+<ul th:each="answer: ${exersice.answers}">
+    <li th:text="${answer}" />
+</ul>
 </body>
 </html>
