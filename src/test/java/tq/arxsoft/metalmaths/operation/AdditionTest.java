@@ -25,7 +25,7 @@ class AdditionTest {
     @Test
     void get_3_possible_answers() {
         //given
-        Addition addition = new Addition(2,2);
+        Exercise addition = new Addition(2,2);
 
         //when
         List<Integer> answers = addition.getAnswerWithOnlyOneCorrect();

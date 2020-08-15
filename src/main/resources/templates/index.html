@@ -7,8 +7,10 @@
 </head>
 <body>
 <span th:text="${exersice.formula}"></span>
-<ul th:each="answer: ${exersice.answers}">
-    <li th:text="${answer}" />
-</ul>
+<form th:action="@{answer}">
+<tr th:each="answer: ${exersice.answers}">
+    <td><button name="answer" type="submit" th:value="${answer}" th:text="${answer}" /></td>
+</tr>
+</form>
 </body>
 </html>

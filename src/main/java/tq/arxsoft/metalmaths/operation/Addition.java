@@ -1,13 +1,12 @@
 package tq.arxsoft.metalmaths.operation;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.*;
 
 @Data
-public class Addition implements ExerciseInterface {
+public class Addition implements Exercise {
 
     private int first;
     private int second;
@@ -30,6 +29,7 @@ public class Addition implements ExerciseInterface {
         return builder.toString();
     }
 
+    @Override
     public List<Integer> getAnswerWithOnlyOneCorrect() {
         Set<Integer> answers = new TreeSet<>();
         answers.add( first + second );
@@ -39,5 +39,10 @@ public class Addition implements ExerciseInterface {
             answers.add(number);
         }
         return new ArrayList<Integer>(answers);
+    }
+
+    @Override
+    public boolean checkAnswer(int answer) {
+        return answer == first + second;
     }
 }
