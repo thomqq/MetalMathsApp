@@ -8,7 +8,7 @@
 <body>
 <span th:text="${exersice.formula}"></span>
 <audio controls>
-    <source  src="/mp3Formula" type="audio/mpeg">
+    <source th:src="@{mp3Formula(formula=${exersice.formula})}"  type="audio/mpeg">
     Say it!
 </audio>
 <form th:action="@{answer}">
