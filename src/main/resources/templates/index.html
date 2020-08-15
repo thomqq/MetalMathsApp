@@ -7,10 +7,18 @@
 </head>
 <body>
 <span th:text="${exersice.formula}"></span>
+<audio controls>
+    <source  src="/mp3Formula" type="audio/mpeg">
+    Say it!
+</audio>
 <form th:action="@{answer}">
-<tr th:each="answer: ${exersice.answers}">
-    <td><button name="answer" type="submit" th:value="${answer}" th:text="${answer}" /></td>
-</tr>
+    <table>
+        <tr>
+            <td th:each="answer: ${exersice.answers}">
+                <button name="answer" type="submit" th:value="${answer}" th:text="${answer}"/>
+            </td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>
