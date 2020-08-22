@@ -12,7 +12,7 @@
         <!--/*@thymesVar id="exersice" type="tq.arxsoft.metalmaths.model.ExerciseDTO"*/-->
         <span th:text="${exersice.formula}"></span>
     </div>
-    <form th:action="@{/}">
+    <form th:action="@{request}">
         <button type="submit">NEXT</button>
     </form>
 </div>

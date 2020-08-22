@@ -1,4 +1,4 @@
-package tq.arxsoft.metalmaths;
+package tq.arxsoft.metalmaths.services;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
