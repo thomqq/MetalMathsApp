@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class SimpleRandomLesson implements CurrentLesson {
 
     private Lesson lesson;
-    List<Integer> lessonOrder;
+    private List<Integer> lessonOrder;
     private Integer currentLessonIdx;
 
     public SimpleRandomLesson(Lesson lesson) {
@@ -34,6 +34,24 @@ public class SimpleRandomLesson implements CurrentLesson {
             return null;
         }
         return lesson.getExerciseList().get(currentLessonIdx++);
+    }
+
+    @Override
+    public Exercise getCurrentExercise() {
+        if( !isNextExercise() ) {
+            return null;
+        }
+        return lesson.getExerciseList().get(currentLessonIdx);
+    }
+
+    @Override
+    public boolean checkAnswer(String answer) {
+        return lesson.getExerciseList().get(currentLessonIdx).checkAnswer(Integer.parseInt(answer));
+    }
+
+    @Override
+    public long getLessonId() {
+        return lesson.getId();
     }
 
 }
