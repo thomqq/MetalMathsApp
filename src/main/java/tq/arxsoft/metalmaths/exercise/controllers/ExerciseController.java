@@ -58,27 +58,31 @@ public class ExerciseController {
     }
 
     @RequestMapping("/goodAnswer")
-    public ModelAndView goodAnswer() {
+    public ModelAndView goodAnswer(@RequestParam String answer) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("answer :: content");
+        modelAndView.setViewName("answer");
 
         Exercise operation = exerciseContext.getCurrentExercise().getCurrentExercise();
         ExerciseDTO exerciseDTO = Mapper.mapFromAddition(operation);
 
         modelAndView.addObject("exercise", exerciseDTO);
+        modelAndView.addObject("answer", answer);
+        modelAndView.addObject("is_correct", true);
         modelAndView.addObject("message", "answer.GOOD");
         return modelAndView;
     }
 
     @RequestMapping("/badAnswer")
-    public ModelAndView bedAnswer() {
+    public ModelAndView bedAnswer(@RequestParam String answer) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("answer :: content");
+        modelAndView.setViewName("answer");
 
         Exercise operation = exerciseContext.getCurrentExercise().getCurrentExercise();
         ExerciseDTO exerciseDTO = Mapper.mapFromAddition(operation);
 
         modelAndView.addObject("exercise", exerciseDTO);
+        modelAndView.addObject("answer", answer);
+        modelAndView.addObject("is_correct", false);
         modelAndView.addObject("message", "answer.BAD");
         return modelAndView;
     }
