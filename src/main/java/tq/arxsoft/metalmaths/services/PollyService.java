@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import sun.audio.AudioPlayer;
+import tq.arxsoft.metalmaths.domain.Mp3Cache;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +22,7 @@ import java.io.InputStream;
 public class PollyService {
 
     private AmazonPolly amazonPolly;
+    private Mp3Cache mp3Cache;
 
     @Autowired
     public PollyService(Region region, @Value("${aws.key.access}") String accesKey, @Value("${aws.key.secret}") String secretKey) {
