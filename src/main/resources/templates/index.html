@@ -27,16 +27,14 @@
         </div>
         <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-center ">
                 <form th:action="@{answer}">
-                    <table width="100%">
-                        <tr>
-                            <td th:each="answer: ${exercise.answers}">
-                                <button class="btn btn-primary rounded-circle w-30 h-30 p-3" name="answer" type="submit" th:value="${answer}"
+                    <div class="span3">
+                            <th:block th:each="answer: ${exercise.answers}">
+                                <button class="btn btn-primary rounded-circle" style="min-width: 40px; min-height: 40px;" name="answer" type="submit" th:value="${answer}"
                                         th:text="${answer}"/>
-                            </td>
-                        </tr>
-                    </table>
+                            </th:block>
+                    </div>
                 </form>
             </div>
             <div class="col-md-4"></div>
