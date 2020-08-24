@@ -66,7 +66,7 @@ public class ExerciseController {
         ExerciseDTO exerciseDTO = Mapper.mapFromAddition(operation);
 
         modelAndView.addObject("exercise", exerciseDTO);
-        modelAndView.addObject("message", "GOOD");
+        modelAndView.addObject("message", "answer.GOOD");
         return modelAndView;
     }
 
@@ -79,7 +79,7 @@ public class ExerciseController {
         ExerciseDTO exerciseDTO = Mapper.mapFromAddition(operation);
 
         modelAndView.addObject("exercise", exerciseDTO);
-        modelAndView.addObject("message", "BAD");
+        modelAndView.addObject("message", "answer.BAD");
         return modelAndView;
     }
 
