@@ -6,26 +6,24 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.services.polly.AmazonPolly;
 import com.amazonaws.services.polly.AmazonPollyClientBuilder;
 import com.amazonaws.services.polly.model.*;
-import javazoom.jl.decoder.JavaLayerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import sun.audio.AudioPlayer;
-import tq.arxsoft.metalmaths.domain.Mp3Cache;
+import tq.arxsoft.metalmaths.domain.limiter.RequestLimiter;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-//@PropertySource("classpath:application.properties")
+
 @Service
 public class PollyService {
 
     private AmazonPolly amazonPolly;
-    private Mp3Cache mp3Cache;
+    private RequestLimiter requestLimiter;
 
     @Autowired
-    public PollyService(Region region, @Value("${aws.key.access}") String accesKey, @Value("${aws.key.secret}") String secretKey) {
+    public PollyService(Region region, @Value("${aws.key.access}") String accesKey, @Value("${aws.key.secret}") String secretKey, RequestLimiter requestLimiter) {
+        this.requestLimiter = requestLimiter;
         //
         // Use your access key id and access secret key
         // Obtain it from AWS console
@@ -41,6 +39,10 @@ public class PollyService {
 
 
     public InputStream synthesize(String text, OutputFormat format) throws IOException {
+
+        if( requestLimiter.isLimitReached() ) {
+            throw new RuntimeException("TQ: A limit of request was reached");
+        }
 
         //
         // Create speech synthesis request comprising of information such as following:
