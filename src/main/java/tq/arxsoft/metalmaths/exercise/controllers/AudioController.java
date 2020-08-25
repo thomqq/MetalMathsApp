@@ -37,7 +37,11 @@ public class AudioController {
         if( !mp3Cache.contain(formula) ) {
             mp3Cache.save(formula, pollyService.synthesize(formula, OutputFormat.Mp3));
         }
-        InputStream is = new FileInputStream(mp3Cache.getPathFor(formula));
+        String pathForMp3File = mp3Cache.getPathFor(formula);
+        if( pathForMp3File == null) {
+            throw new RuntimeException("TQ: some problem with: " + formula);
+        }
+        InputStream is = new FileInputStream(pathForMp3File);
         IOUtils.copy(is, response.getOutputStream());
     }
 }
