@@ -16,25 +16,28 @@ public class LessonServiceFake implements LessonsService {
 
     @Override
     public Lesson getLesson(long id) {
+        LessonServiceFake.LessonsHelper.init();
         return LessonsHelper.id2lessons.get(id);
     }
 
     private static class LessonsHelper {
         static List< Lesson > lessons = new ArrayList<>();
         static HashMap< Long, Lesson > id2lessons = new HashMap<>();
+
         static {
+            init();
+        }
+
+        static void init() {
+            lessons.clear();
+            id2lessons.clear();
+
             Random rnd = new Random(System.currentTimeMillis());
 
-
-            Lesson lesson = new Lesson(1, "Dodawanie 10", Arrays.asList(new Addition(rnd.nextInt(10) + 1, rnd.nextInt(10) + 1)));
-            Lesson lesson1 = new Lesson(2, "Dodawanie 5", Arrays.asList(new Addition(rnd.nextInt(5) + 1, rnd.nextInt(5) + 1)));
-            Lesson lesson2 = new Lesson(3, "Dodawanie 3", Arrays.asList(new Addition(rnd.nextInt(3) + 1, rnd.nextInt(3) + 1)));
-            id2lessons.put(lesson.getId(), lesson);
-            id2lessons.put(lesson1.getId(), lesson1);
-            id2lessons.put(lesson2.getId(), lesson2);
-            lessons.add(lesson);
-            lessons.add(lesson1);
-            lessons.add(lesson2);
+            addLesson(1, "Dodawanie 10", 10, rnd);
+            addLesson(2, "Dodawanie 25", 25, rnd);
+            addLesson(3, "Dodawanie 50", 50, rnd);
+            addLesson(4, "Dodawanie 100", 100, rnd);
 
         }
 
@@ -44,6 +47,12 @@ public class LessonServiceFake implements LessonsService {
                 lessonInfos.add(new LessonInfo(lesson.getName(), lesson.getId()));
             }
             return lessonInfos;
+        }
+
+        static void addLesson(long id, String name, int range, Random rnd) {
+            Lesson lesson = new Lesson(id, name, Arrays.asList(new Addition(rnd.nextInt(range) + 1, rnd.nextInt(range) + 1)));
+            id2lessons.put(lesson.getId(), lesson);
+            lessons.add(lesson);
         }
 
     }

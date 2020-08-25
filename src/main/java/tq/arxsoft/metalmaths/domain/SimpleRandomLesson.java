@@ -20,12 +20,12 @@ public class SimpleRandomLesson implements CurrentLesson {
         this.lesson = lesson;
         lessonOrder = IntStream.range(0, lesson.getExerciseList().size()).boxed().collect(Collectors.toList());
         Collections.shuffle(lessonOrder);
-        currentLessonIdx = 0;
+        currentLessonIdx = -1;
     }
 
     @Override
     public boolean isNextExercise() {
-        return lesson != null && currentLessonIdx < lesson.getExerciseList().size();
+        return lesson != null && ( currentLessonIdx + 1) < lesson.getExerciseList().size();
     }
 
     @Override
@@ -33,12 +33,12 @@ public class SimpleRandomLesson implements CurrentLesson {
         if( !isNextExercise()) {
             return null;
         }
-        return lesson.getExerciseList().get(currentLessonIdx++);
+        return lesson.getExerciseList().get(++currentLessonIdx);
     }
 
     @Override
     public Exercise getCurrentExercise() {
-        if( !isNextExercise() ) {
+        if( currentLessonIdx < 0 || currentLessonIdx >= lesson.getExerciseList().size()) {
             return null;
         }
         return lesson.getExerciseList().get(currentLessonIdx);

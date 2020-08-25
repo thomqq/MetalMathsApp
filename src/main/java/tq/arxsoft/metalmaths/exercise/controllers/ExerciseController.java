@@ -1,6 +1,8 @@
 package tq.arxsoft.metalmaths.exercise.controllers;
 
 import com.sun.istack.Nullable;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +21,7 @@ import tq.arxsoft.metalmaths.services.LessonsService;
 
 @Controller
 @Validated
+@Slf4j
 public class ExerciseController {
 
     private ExerciseContext exerciseContext;
@@ -45,7 +48,7 @@ public class ExerciseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
 
-        Exercise operation = exerciseContext.getCurrentExercise().getCurrentExercise();
+        Exercise operation = exerciseContext.getCurrentExercise().getNextExercise();
         ExerciseDTO exerciseDTO = Mapper.mapFromAddition(operation);
 
         modelAndView.addObject("exercise", exerciseDTO);
@@ -53,6 +56,7 @@ public class ExerciseController {
     }
 
     private void initCurrenExercise(long lessonId) {
+        //log.info("TQ: initCurrenExercise");
         Lesson lesson = lessonsService.getLesson(lessonId);
         exerciseContext.setCurrentExercise(new SimpleRandomLesson(lesson));
     }
