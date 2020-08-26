@@ -8,4 +8,11 @@ import lombok.Data;
 public class LessonInfo {
     private String name;
     private long id;
+    private String path;
+
+    public LessonInfo(String name, long id) {
+        this.name = name;
+        this.id = id;
+        this.path = "";
+    }
 }

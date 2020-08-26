@@ -6,4 +6,5 @@ public interface Exercise {
     String getQeustion();
     List<String> getAnswerWithOnlyOneCorrect();
     boolean checkAnswer(String answer);
+    ExerciseType getType();
 }

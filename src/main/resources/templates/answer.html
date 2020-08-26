@@ -10,7 +10,7 @@
 <div class="container">
     <div class="col-md-3"></div>
     <div class="col-md-6 text-center">
-        <div>
+        <div>6
             <div>
                 <!--/*@thymesVar id="exercise" type="tq.arxsoft.metalmaths.model.ExerciseDTO"*/-->
                 <span th:text="${exercise.formula} + (${is_correct} ? ' = ' : ' != ' )+ ${answer}"></span>
@@ -21,7 +21,7 @@
             <br/>
             <br/>
             <form th:action="@{request}">
-                <button class="btn btn-primary" type="submit" th:text="#{answer.next}">NEXT</button>
+                <button class="btn btn-primary" type="submit" th:text="#{answer.next}" autofocus>NEXT</button>
             </form>
         </div>
     </div>

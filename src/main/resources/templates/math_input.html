@@ -16,25 +16,14 @@
                 <span th:text="${exercise.formula}" style="display: none"></span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <audio controls>
-                    <!--/*@thymesVar id="exercise" type="tq.arxsoft.metalmaths.model.ExerciseDTO"*/-->
-                    <source th:src="@{mp3Formula(formula=${exercise.formula})}" type="audio/mpeg">
-                    Say it!
-                </audio>
-            </div>
-        </div>
+        <div th:replace="fragments/mp3Player.html :: player"></div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center ">
                 <form th:action="@{answer}">
-                    <div class="span3">
-                            <th:block th:each="answer: ${exercise.answers}">
-                                <button class="btn btn-primary rounded-circle" style="min-width: 40px; min-height: 40px;" name="answer" type="submit" th:value="${answer}"
-                                        th:text="${answer}"/>
-                            </th:block>
-                    </div>
+                    <label for="answer" th:text="#{math_input.answer}">answer</label>
+                    <input id="answer" name="answer" type="number" size="20" autofocus/>
+                    <button type="submit" th:text="#{math_input.send}"></button>
                 </form>
             </div>
             <div class="col-md-4"></div>

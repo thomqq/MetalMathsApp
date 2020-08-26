@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tq.arxsoft.metalmaths.domain.IdentityUtil;
 import tq.arxsoft.metalmaths.domain.Mp3Cache;
+import tq.arxsoft.metalmaths.exercise.LessonViewHelper;
 
 @Configuration
 public class MainConfiguration {
@@ -24,5 +25,10 @@ public class MainConfiguration {
     @Bean
     IdentityUtil getIndentityUtil() {
         return new IdentityUtil();
+    }
+
+    @Bean
+    LessonViewHelper getLessonViewHelper() {
+        return new LessonViewHelper();
     }
 }

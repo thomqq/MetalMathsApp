@@ -6,17 +6,22 @@ import lombok.Data;
 import java.util.*;
 
 @Data
-public class Addition implements Exercise {
-
-    private int first;
-    private int second;
+public class Addition extends MathExercise {
 
     private int maxResult;
 
+    public Addition() {
+        super(0,0);
+    }
+
     public Addition(int first, int second) {
+        super(first, second);
+    }
+
+    @Override
+    public void init(int first, int second) {
         this.first = first;
         this.second = second;
-
         maxResult = 3 * (second + first);
     }
 
@@ -44,5 +49,10 @@ public class Addition implements Exercise {
     @Override
     public boolean checkAnswer(String answer) {
         return answer.equals(Integer.toString(first + second));
+    }
+
+    @Override
+    public ExerciseType getType() {
+        return exerciseType;
     }
 }
