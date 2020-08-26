@@ -8,11 +8,14 @@ public class LessonViewHelper {
     public String getViewForExercise(ExerciseType type) {
         String result = "";
         switch (type) {
+            case CardSpelling:
+            case CardFlash:
             case MathInput:
                 result="math_input";
                 break;
-            default:
+            case MathAnswer:
                 result = "math";
+                break;
         }
 
         return result;

@@ -7,10 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.model.LessonInfo;
-import tq.arxsoft.metalmaths.operation.Addition;
-import tq.arxsoft.metalmaths.operation.Exercise;
-import tq.arxsoft.metalmaths.operation.ExerciseType;
-import tq.arxsoft.metalmaths.operation.MathExercise;
+import tq.arxsoft.metalmaths.operation.*;
 import utils.FilesUtils;
 
 import java.io.IOException;
@@ -18,8 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.DoubleToIntFunction;
-import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -108,6 +103,42 @@ public class LessonServiceDirectory implements LessonsService {
     Exercise createExercise(Map<String, String> items ) {
         ExerciseType exerciseType = ExerciseType.valueOf(items.get("type"));
 
+        Exercise exercise = null;
+        switch (exerciseType) {
+            case MathInput:
+            case MathAnswer:
+                exercise = createMathExercise(items, exerciseType);
+                break;
+            case CardSpelling:
+                exercise = createSpellingExercise(items, exerciseType);
+                break;
+            case CardFlash:
+                exercise = createFlashExercise(items, exerciseType);
+                break;
+        }
+        return exercise;
+    }
+
+    private FlashCard createSpellingExercise(Map<String, String> items, ExerciseType exerciseType) {
+        String answer = items.get("word");
+        StringBuilder builder = new StringBuilder();
+        for( int i = 0 ; i < answer.length(); ++i) {
+            builder.append(answer.charAt(i));
+            builder.append(",");
+        }
+        String question = builder.toString().trim();
+        FlashCard flashCard = new FlashCard(question, answer);
+        return flashCard;
+    }
+
+    private FlashCard createFlashExercise(Map<String, String> items, ExerciseType exerciseType) {
+        String question = items.get("word");
+        String answer = items.get("word");
+        FlashCard flashCard = new FlashCard(question, answer);
+        return flashCard;
+    }
+
+    private MathExercise createMathExercise(Map<String, String> items, ExerciseType exerciseType) {
         String[] operationItem = items.get("operation").split(" ");
         List<String> values = new ArrayList<>();
         MathExercise mathExercise = null;
@@ -123,7 +154,6 @@ public class LessonServiceDirectory implements LessonsService {
             }
         }
         mathExercise.init(Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)));
-
         return mathExercise;
     }
 

@@ -7,6 +7,7 @@ import tq.arxsoft.metalmaths.model.LessonInfo;
 import tq.arxsoft.metalmaths.operation.Addition;
 import tq.arxsoft.metalmaths.operation.Exercise;
 import tq.arxsoft.metalmaths.operation.ExerciseType;
+import tq.arxsoft.metalmaths.operation.FlashCard;
 
 import java.io.File;
 import java.util.Collections;
@@ -33,7 +34,7 @@ class LessonServiceDirectoryTest {
     }
 
     @Test
-    void ShouldCreateMathExercis6eForLessonId1() {
+    void ShouldCreateMathExerciseForLessonId1() {
         //when
         //LessonServiceDirectory lessonServiceDirectory = new LessonServiceDirectory("src\\test\\java\\tq\\arxsoft\\metalmaths\\services\\lessons");
 
@@ -62,6 +63,39 @@ class LessonServiceDirectoryTest {
             assertEquals(additions[i], exercise);
         }
     }
+
+    @Test
+    void shouldCreateSpellingExercise() {
+        //when
+        String[] items = new String[]{"id: 1|type: CardSpelling|word: RUN",
+                "id: 1|type: CardSpelling|word: AVAILABLE"};
+        FlashCard[] card = new FlashCard[]{new FlashCard("R,U,N,", "RUN"),
+                new FlashCard("A,V,A,I,L,A,B,L,E,", "AVAILABLE")};
+        for (int i = 0; i < items.length; i++) {
+            //given
+            HashMap<String, String> lineItems = prepare(items[i]);
+            Exercise exercise = lessonServiceDirectory.createExercise(lineItems);
+            //then
+            assertEquals(card[i], exercise);
+        }
+    }
+
+    @Test
+    void shouldCreateFlashExercise() {
+        //when
+        String[] items = new String[]{"id: 1|type: CardFalsh|word: RUN",
+                "id: 1|type: CardFalsh|word: AVAILABLE"};
+        FlashCard[] card = new FlashCard[]{new FlashCard("RUN", "RUN"),
+                new FlashCard("AVAILABLE", "AVAILABLE")};
+        for (int i = 0; i < items.length; i++) {
+            //given
+            HashMap<String, String> lineItems = prepare(items[i]);
+            Exercise exercise = lessonServiceDirectory.createExercise(lineItems);
+            //then
+            assertEquals(card[i], exercise);
+        }
+    }
+
 
     private HashMap<String, String> prepare(String item) {
         HashMap<String, String> result = new HashMap<>();
