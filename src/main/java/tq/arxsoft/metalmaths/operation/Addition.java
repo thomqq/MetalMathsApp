@@ -10,18 +10,18 @@ public class Addition extends MathExercise {
 
     private int maxResult;
 
-    public Addition() {
-        super(0,0);
+    public Addition(ExerciseType exerciseType) {
+        super(0,0, exerciseType);
     }
 
-    public Addition(int first, int second) {
-        super(first, second);
+    public Addition(int first, int second, ExerciseType exerciseType) {
+        super(first, second, exerciseType);
     }
 
     @Override
     public void init(int first, int second) {
-        this.first = first;
-        this.second = second;
+        this.first = randomUtil.nextInt(first);
+        this.second = randomUtil.nextInt(second);
         maxResult = 3 * (second + first);
     }
 

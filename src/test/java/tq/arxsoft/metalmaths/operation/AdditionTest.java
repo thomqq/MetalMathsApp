@@ -11,7 +11,7 @@ class AdditionTest {
     @Test
     void return_correct_formula_2_plus_2() {
         //given
-        Addition addition = new Addition(2,2);
+        Addition addition = new Addition(2,2, ExerciseType.MathAnswer);
 
         //when
         String result = addition.getQeustion();
@@ -25,7 +25,7 @@ class AdditionTest {
     @Test
     void get_3_possible_answers() {
         //given
-        Exercise addition = new Addition(2,2);
+        Exercise addition = new Addition(2,2, ExerciseType.MathAnswer);
 
         //when
         List<String> answers = addition.getAnswerWithOnlyOneCorrect();

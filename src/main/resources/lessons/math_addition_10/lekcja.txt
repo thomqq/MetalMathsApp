@@ -1,0 +1,6 @@
+## Dodawanie do 50
+id: 1
+type: MathInput
+operation: L1 + L2
+L1: 10
+L2: 10

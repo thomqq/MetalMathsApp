@@ -1,0 +1,3 @@
+## Lekcja
+id: 2
+title: Dodawanie do 25

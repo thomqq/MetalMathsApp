@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.operation.Addition;
 import tq.arxsoft.metalmaths.operation.Exercise;
+import tq.arxsoft.metalmaths.operation.ExerciseType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ class SimpleRandomLessonTest {
 
     @BeforeEach
     void prepareLesson(){
-         lesson = new Lesson(1, "some", Arrays.asList(new Exercise[] {new Addition(2, 3),new Addition(2, 3), new Addition(2, 3)}));
+         lesson = new Lesson(1, "some", Arrays.asList(new Exercise[] {new Addition(2, 3, ExerciseType.MathAnswer),new Addition(2, 3, ExerciseType.MathAnswer), new Addition(2, 3, ExerciseType.MathAnswer)}));
     }
 
     @Test

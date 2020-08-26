@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.model.LessonInfo;
 import tq.arxsoft.metalmaths.operation.Addition;
+import tq.arxsoft.metalmaths.operation.ExerciseType;
 
 import java.util.*;
 
@@ -51,7 +52,7 @@ public class LessonServiceFake implements LessonsService {
         }
 
         static void addLesson(long id, String name, int range, Random rnd) {
-            Lesson lesson = new Lesson(id, name, Arrays.asList(new Addition(rnd.nextInt(range) + 1, rnd.nextInt(range) + 1)));
+            Lesson lesson = new Lesson(id, name, Arrays.asList(new Addition(rnd.nextInt(range) + 1, rnd.nextInt(range) + 1, ExerciseType.MathInput)));
             id2lessons.put(lesson.getId(), lesson);
             lessons.add(lesson);
         }

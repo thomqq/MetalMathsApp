@@ -38,7 +38,6 @@ public class LessonServiceDirectory implements LessonsService {
         try {
             Files.list(Paths.get(lessonDirectory)).filter(Files::isDirectory).map(fileName -> parseLessonInfoFile(fileName)).forEach(
                     lessonInfo -> {
-                        System.out.println(lessonInfo.getId() + " : " + lessonInfo.getName());
                         lessonInfos.add(lessonInfo);
                     }
             );
@@ -115,7 +114,7 @@ public class LessonServiceDirectory implements LessonsService {
         for( String item : operationItem) {
             if (!item.isEmpty() && !item.equals(" ")) {
                 if (item.equals("+")) {
-                    mathExercise = new Addition();
+                    mathExercise = new Addition(exerciseType);
                     continue;
                 }
                 if( items.containsKey(item.toLowerCase())) {

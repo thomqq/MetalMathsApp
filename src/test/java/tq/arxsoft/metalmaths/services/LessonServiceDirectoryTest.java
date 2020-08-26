@@ -6,6 +6,7 @@ import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.model.LessonInfo;
 import tq.arxsoft.metalmaths.operation.Addition;
 import tq.arxsoft.metalmaths.operation.Exercise;
+import tq.arxsoft.metalmaths.operation.ExerciseType;
 
 import java.io.File;
 import java.util.Collections;
@@ -43,7 +44,7 @@ class LessonServiceDirectoryTest {
 
         //then
         assertEquals(1, lesson.getExerciseList().size());
-        assertEquals(exerciseList.get(0), new Addition(10, 10));
+        assertEquals(exerciseList.get(0), new Addition(10, 10, ExerciseType.MathInput));
     }
 
     @Test
@@ -51,8 +52,8 @@ class LessonServiceDirectoryTest {
         //when
         String[] items = new String[]{"id: 1|type: MathAnswer|operation: L1 + L2|L1: 100|L2: 100",
                 "id: 1|type: MathAnswer|operation: L1 + L2|L1: 22|L2: 13"};
-        Addition[] additions = new Addition[]{new Addition(100, 100),
-                new Addition(22, 13)};
+        Addition[] additions = new Addition[]{new Addition(100, 100, ExerciseType.MathAnswer),
+                new Addition(22, 13, ExerciseType.MathAnswer)};
         for (int i = 0; i < items.length; i++) {
             //given
             HashMap<String, String> lineItems = prepare(items[i]);

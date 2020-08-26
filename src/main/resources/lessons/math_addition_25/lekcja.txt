@@ -1,0 +1,6 @@
+## Dodawanie do 25
+id: 1
+type: MathAnswer
+operation: L1 + L2
+L1: 25
+L2: 25
