@@ -23,7 +23,7 @@ class RequestLimiterDerbyTest {
     void isLimitReached() {
         //when
         requestLimiterDerby.setMaxAllowedRequest(2);
-        requestLimiterDerby.setDate(LocalDate.now().minusDays(1));
+        requestLimiterDerby.setDate(LocalDate.now().minusDays(3));
         //given
         //then
         assertEquals(false, requestLimiterDerby.isLimitReached());

@@ -46,7 +46,7 @@ public class SimpleRandomLesson implements CurrentLesson {
 
     @Override
     public boolean checkAnswer(String answer) {
-        return lesson.getExerciseList().get(currentLessonIdx).checkAnswer(Integer.parseInt(answer));
+        return lesson.getExerciseList().get(currentLessonIdx).checkAnswer(answer);
     }
 
     @Override

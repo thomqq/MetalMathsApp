@@ -21,7 +21,7 @@ public class Addition implements Exercise {
     }
 
     @Override
-    public String getFormula() {
+    public String getQeustion() {
         StringBuilder builder = new StringBuilder();
         builder.append(first);
         builder.append(" + ");
@@ -30,19 +30,19 @@ public class Addition implements Exercise {
     }
 
     @Override
-    public List<Integer> getAnswerWithOnlyOneCorrect() {
-        Set<Integer> answers = new TreeSet<>();
-        answers.add( first + second );
+    public List<String> getAnswerWithOnlyOneCorrect() {
+        Set<String> answers = new TreeSet<>();
+        answers.add( Integer.toString(first + second ) );
         Random rnd = new Random(System.currentTimeMillis());
         while (answers.size() < 3) {
             int number = rnd.nextInt(maxResult);
-            answers.add(number);
+            answers.add(Integer.toString(number));
         }
-        return new ArrayList<Integer>(answers);
+        return new ArrayList<String>(answers);
     }
 
     @Override
-    public boolean checkAnswer(int answer) {
-        return answer == first + second;
+    public boolean checkAnswer(String answer) {
+        return answer.equals(Integer.toString(first + second));
     }
 }

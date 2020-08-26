@@ -14,7 +14,7 @@ class AdditionTest {
         Addition addition = new Addition(2,2);
 
         //when
-        String result = addition.getFormula();
+        String result = addition.getQeustion();
         String expected = "2 + 2";
 
         //then
@@ -28,17 +28,17 @@ class AdditionTest {
         Exercise addition = new Addition(2,2);
 
         //when
-        List<Integer> answers = addition.getAnswerWithOnlyOneCorrect();
+        List<String> answers = addition.getAnswerWithOnlyOneCorrect();
 
         //then
         int numberOfCorrectAnswer = 0;
-        for( Integer number : answers ) {
-            if( number.equals(4) ) {
+        for( String number : answers ) {
+            if( number.equals("4") ) {
                 numberOfCorrectAnswer++;
             }
         }
 
-        assertEquals(numberOfCorrectAnswer, 1);
+        assertEquals(1, numberOfCorrectAnswer);
 
     }
 

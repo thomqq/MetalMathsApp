@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Mapper {
     public static ExerciseDTO mapFromAddition(Exercise addition) {
-        ExerciseDTO exerciseDTO = new ExerciseDTO(addition.getFormula(),
+        ExerciseDTO exerciseDTO = new ExerciseDTO(addition.getQeustion(),
                 addition.getAnswerWithOnlyOneCorrect().stream().map(x -> x.toString()).collect(Collectors.toList()));
         return exerciseDTO;
     }
