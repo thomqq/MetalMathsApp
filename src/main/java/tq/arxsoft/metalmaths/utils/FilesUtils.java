@@ -1,4 +1,4 @@
-package utils;
+package tq.arxsoft.metalmaths.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

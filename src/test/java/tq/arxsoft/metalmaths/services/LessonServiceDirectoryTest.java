@@ -68,10 +68,10 @@ class LessonServiceDirectoryTest {
     @Test
     void shouldCreateSpellingExercise() {
         //when
-        String[] items = new String[]{"id: 1|type: CardSpelling|word: RUN",
-                "id: 1|type: CardSpelling|word: AVAILABLE"};
-        FlashCard[] card = new FlashCard[]{new FlashCard("R,U,N,", "RUN"),
-                new FlashCard("A,V,A,I,L,A,B,L,E,", "AVAILABLE")};
+        String[] items = new String[]{"id: 1|type: CardSpelling|word: {EN}RUN",
+                "id: 1|type: CardSpelling|word: {PL}AVAILABLE"};
+        FlashCard[] card = new FlashCard[]{new FlashCard("R,U,N,", "RUN", "EN"),
+                new FlashCard("A,V,A,I,L,A,B,L,E,", "AVAILABLE", "PL")};
         for (int i = 0; i < items.length; i++) {
             //given
             HashMap<String, List<String>> lineItems = new HashMap<>();

@@ -10,10 +10,18 @@ public class FlashCard implements Exercise{
 
     private String question;
     private String answer;
+    private String lang;
 
     public FlashCard(String question, String answer) {
         this.question = question;
         this.answer = answer;
+        lang = "EN";
+    }
+
+    public FlashCard(String question, String answer, String lang) {
+        this.question = question;
+        this.answer = answer;
+        this.lang = lang;
     }
 
     @Override
@@ -34,5 +42,10 @@ public class FlashCard implements Exercise{
     @Override
     public ExerciseType getType() {
         return ExerciseType.CardSpelling;
+    }
+
+    @Override
+    public String getLanguage() {
+        return lang;
     }
 }

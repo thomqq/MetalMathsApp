@@ -9,7 +9,7 @@ import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.model.LessonInfo;
 import tq.arxsoft.metalmaths.operation.*;
 import tq.arxsoft.metalmaths.parsers.ExerciseParser;
-import utils.FilesUtils;
+import tq.arxsoft.metalmaths.utils.FilesUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
 ## CardSpelling
 id: 1
 type: CardSpelling
-word: RUN
+word: {PL}RUN
