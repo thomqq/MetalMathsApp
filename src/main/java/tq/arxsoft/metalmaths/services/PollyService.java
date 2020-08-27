@@ -20,10 +20,12 @@ public class PollyService {
 
     private AmazonPolly amazonPolly;
     private RequestLimiter requestLimiter;
+    private PollyLang pollyLang;
 
     @Autowired
-    public PollyService(Region region, @Value("${aws.key.access}") String accesKey, @Value("${aws.key.secret}") String secretKey, RequestLimiter requestLimiter) {
+    public PollyService(Region region, @Value("${aws.key.access}") String accesKey, @Value("${aws.key.secret}" ) String secretKey, RequestLimiter requestLimiter, PollyLang pollyLang) {
         this.requestLimiter = requestLimiter;
+        this.pollyLang = pollyLang;
         //
         // Use your access key id and access secret key
         // Obtain it from AWS console
@@ -38,7 +40,7 @@ public class PollyService {
     }
 
 
-    public InputStream synthesize(String text, OutputFormat format) throws IOException {
+    public InputStream synthesize(String text, OutputFormat format, String lang) throws IOException {
 
         if( requestLimiter.isLimitReached() ) {
             throw new RuntimeException("TQ: A limit of request was reached");
@@ -50,7 +52,11 @@ public class PollyService {
         // Voice
         // The detail will be used to create the speech
         //
-        SynthesizeSpeechRequest synthReq = new SynthesizeSpeechRequest().withText(text).withVoiceId(VoiceId.Joanna)
+        VoiceId voiceId = pollyLang.getVoiceId(lang);
+        if( voiceId == null ) {
+            throw new RuntimeException("TQ: no VoiceId for: " + lang);
+        }
+        SynthesizeSpeechRequest synthReq = new SynthesizeSpeechRequest().withText(text).withVoiceId(voiceId)
                 .withOutputFormat(format);
         //
         // Create the speech

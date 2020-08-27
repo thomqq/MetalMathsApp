@@ -11,4 +11,5 @@ import java.util.List;
 public class ExerciseDTO {
     private String formula;
     private List<String> answers;
+    private String lang = "EN";
 }

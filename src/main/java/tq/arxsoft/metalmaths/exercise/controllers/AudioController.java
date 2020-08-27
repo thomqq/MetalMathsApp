@@ -34,7 +34,7 @@ public class AudioController {
     public void getMp3AsByttesArrays(HttpServletResponse response, @RequestParam String formula, @RequestParam(value = "lang", required = false, defaultValue = "EN") String lang) throws IOException {
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         if( !mp3Cache.contain(formula, lang) ) {
-            mp3Cache.save(formula, pollyService.synthesize(formula, OutputFormat.Mp3), lang);
+            mp3Cache.save(formula, pollyService.synthesize(formula, OutputFormat.Mp3, lang), lang);
         }
         String pathForMp3File = mp3Cache.getPathFor(formula, lang);
         if( pathForMp3File == null) {

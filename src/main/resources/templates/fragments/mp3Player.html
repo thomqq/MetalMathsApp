@@ -10,7 +10,7 @@
     <div class="col-md-12 text-center">
         <audio controls>
             <!--/*@thymesVar id="exercise" type="tq.arxsoft.metalmaths.model.ExerciseDTO"*/-->
-            <source th:src="@{mp3Formula(formula=${exercise.formula})}" type="audio/mpeg">
+            <source th:src="@{mp3Formula(formula=${exercise.formula}, lang=${exercise.lang})}" type="audio/mpeg">
             Say it!
         </audio>
     </div>

@@ -13,6 +13,8 @@ import tq.arxsoft.metalmaths.parsers.ExerciseParser;
 import tq.arxsoft.metalmaths.parsers.FlashParser;
 import tq.arxsoft.metalmaths.parsers.MathExerciseParser;
 import tq.arxsoft.metalmaths.parsers.SpellingParser;
+import tq.arxsoft.metalmaths.services.PollyLang;
+import tq.arxsoft.metalmaths.services.PollyLangUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,5 +51,10 @@ public class MainConfiguration {
         parsers.put(ExerciseType.CardSpelling, new SpellingParser());
 
         return parsers;
+    }
+
+    @Bean
+    public PollyLang getPollyLang() {
+        return new PollyLangUtil();
     }
 }

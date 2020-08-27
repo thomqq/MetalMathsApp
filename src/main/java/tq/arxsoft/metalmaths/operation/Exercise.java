@@ -7,4 +7,7 @@ public interface Exercise {
     List<String> getAnswerWithOnlyOneCorrect();
     boolean checkAnswer(String answer);
     ExerciseType getType();
+    default String getLanguage() {
+        return "EN";
+    }
 }
