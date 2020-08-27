@@ -26,7 +26,7 @@ public class Addition extends MathExercise {
     }
 
     @Override
-    public String getQeustion() {
+    public String getQuestion() {
         StringBuilder builder = new StringBuilder();
         builder.append(first);
         builder.append(" + ");

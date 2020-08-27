@@ -5,7 +5,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import tq.arxsoft.metalmaths.domain.CurrentLesson;
-import tq.arxsoft.metalmaths.operation.Exercise;
 
 @Component
 @SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)

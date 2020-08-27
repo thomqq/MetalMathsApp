@@ -1,11 +1,9 @@
 package tq.arxsoft.metalmaths.domain.limiter.entity;
 
 import lombok.*;
-import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 

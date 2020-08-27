@@ -14,7 +14,7 @@ class AdditionTest {
         Addition addition = new Addition(2,2, ExerciseType.MathAnswer);
 
         //when
-        String result = addition.getQeustion();
+        String result = addition.getQuestion();
         String expected = "2 + 2";
 
         //then

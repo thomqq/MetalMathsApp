@@ -17,7 +17,7 @@ public class FlashCard implements Exercise{
     }
 
     @Override
-    public String getQeustion() {
+    public String getQuestion() {
         return question;
     }
 

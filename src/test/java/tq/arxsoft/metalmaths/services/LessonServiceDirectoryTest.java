@@ -1,6 +1,5 @@
 package tq.arxsoft.metalmaths.services;
 
-import org.assertj.core.internal.bytebuddy.agent.builder.AgentBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tq.arxsoft.metalmaths.conf.MainConfiguration;
@@ -11,7 +10,6 @@ import tq.arxsoft.metalmaths.operation.Exercise;
 import tq.arxsoft.metalmaths.operation.ExerciseType;
 import tq.arxsoft.metalmaths.operation.FlashCard;
 
-import java.io.File;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;

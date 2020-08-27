@@ -11,7 +11,6 @@ import tq.arxsoft.metalmaths.services.LessonsService;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public class LessonController {

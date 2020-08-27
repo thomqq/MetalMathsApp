@@ -1,6 +1,5 @@
 package tq.arxsoft.metalmaths.exercise;
 
-import lombok.Data;
 import tq.arxsoft.metalmaths.operation.ExerciseType;
 
 

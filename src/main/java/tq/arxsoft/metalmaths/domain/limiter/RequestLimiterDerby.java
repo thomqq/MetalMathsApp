@@ -7,7 +7,6 @@ import tq.arxsoft.metalmaths.domain.limiter.repo.LimitRepo;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Component
 @Transactional
@@ -20,7 +19,6 @@ public class RequestLimiterDerby implements RequestLimiter {
     @Autowired
     public RequestLimiterDerby(LimitRepo limitRepo) {
         this.limitRepo = limitRepo;
-        this.maxAllowedRequest = maxAllowedRequest;
         date = LocalDate.now();
 
         maxAllowedRequest = 1000;
