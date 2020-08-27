@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import tq.arxsoft.metalmaths.model.Lesson;
 import tq.arxsoft.metalmaths.model.LessonInfo;
 import tq.arxsoft.metalmaths.operation.*;
+import tq.arxsoft.metalmaths.parsers.ExerciseParser;
 import utils.FilesUtils;
 
 import java.io.IOException;
@@ -21,10 +22,12 @@ import java.util.*;
 @Primary
 public class LessonServiceDirectory implements LessonsService {
     private String lessonDirectory;
+    private Map<ExerciseType, ExerciseParser> parsers;
 
     @Autowired
-    public LessonServiceDirectory(@Value("${lessons.dir}") String lessonDirectory) {
+    public LessonServiceDirectory(@Value("${lessons.dir}") String lessonDirectory, Map< ExerciseType, ExerciseParser> parsers) {
         this.lessonDirectory = lessonDirectory;
+        this.parsers = parsers;
     }
 
     @Override
@@ -45,8 +48,8 @@ public class LessonServiceDirectory implements LessonsService {
     private LessonInfo parseLessonInfoFile(Path fileName) {
         try {
             Path path = Paths.get(fileName.toString() + "\\info.txt");
-            Map<String, String>  lessonToken = FilesUtils.linesToMap( path);
-            return new LessonInfo(lessonToken.get("title"), Integer.parseInt(lessonToken.get("id")), fileName.toString());
+            Map<String, List<String>>  lessonToken = FilesUtils.linesToMap( path );
+            return new LessonInfo(lessonToken.get("title").get(0), Integer.parseInt(lessonToken.get("id").get(0)), fileName.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -88,9 +91,9 @@ public class LessonServiceDirectory implements LessonsService {
         }).forEach( file ->
                 {
                     try {
-                        Map<String, String> items = FilesUtils.linesToMap(file);
-                        Exercise exercise = createExercise(items);
-                        exercises.add(exercise);
+                        Map<String, List<String>> items = FilesUtils.linesToMap(file);
+                        List<? extends Exercise> tmpExercises = createExercise(items);
+                        exercises.addAll(tmpExercises);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -100,61 +103,12 @@ public class LessonServiceDirectory implements LessonsService {
         return exercises;
     }
 
-    Exercise createExercise(Map<String, String> items ) {
-        ExerciseType exerciseType = ExerciseType.valueOf(items.get("type"));
+    List<? extends Exercise> createExercise(Map<String, List<String>> items ) {
+        ExerciseType exerciseType = ExerciseType.valueOf(items.get("type").get(0));
 
-        Exercise exercise = null;
-        switch (exerciseType) {
-            case MathInput:
-            case MathAnswer:
-                exercise = createMathExercise(items, exerciseType);
-                break;
-            case CardSpelling:
-                exercise = createSpellingExercise(items, exerciseType);
-                break;
-            case CardFlash:
-                exercise = createFlashExercise(items, exerciseType);
-                break;
-        }
+        List<? extends Exercise> exercise = null;
+        ExerciseParser parser = parsers.get(exerciseType);
+        exercise = parser.parse(items, exerciseType);
         return exercise;
     }
-
-    private FlashCard createSpellingExercise(Map<String, String> items, ExerciseType exerciseType) {
-        String answer = items.get("word");
-        StringBuilder builder = new StringBuilder();
-        for( int i = 0 ; i < answer.length(); ++i) {
-            builder.append(answer.charAt(i));
-            builder.append(",");
-        }
-        String question = builder.toString().trim();
-        FlashCard flashCard = new FlashCard(question, answer);
-        return flashCard;
-    }
-
-    private FlashCard createFlashExercise(Map<String, String> items, ExerciseType exerciseType) {
-        String question = items.get("word");
-        String answer = items.get("word");
-        FlashCard flashCard = new FlashCard(question, answer);
-        return flashCard;
-    }
-
-    private MathExercise createMathExercise(Map<String, String> items, ExerciseType exerciseType) {
-        String[] operationItem = items.get("operation").split(" ");
-        List<String> values = new ArrayList<>();
-        MathExercise mathExercise = null;
-        for( String item : operationItem) {
-            if (!item.isEmpty() && !item.equals(" ")) {
-                if (item.equals("+")) {
-                    mathExercise = new Addition(exerciseType);
-                    continue;
-                }
-                if( items.containsKey(item.toLowerCase())) {
-                    values.add(items.get(item.toLowerCase()));
-                }
-            }
-        }
-        mathExercise.init(Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)));
-        return mathExercise;
-    }
-
 }

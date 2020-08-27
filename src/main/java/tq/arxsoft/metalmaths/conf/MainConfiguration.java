@@ -8,6 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import tq.arxsoft.metalmaths.domain.IdentityUtil;
 import tq.arxsoft.metalmaths.domain.Mp3Cache;
 import tq.arxsoft.metalmaths.exercise.LessonViewHelper;
+import tq.arxsoft.metalmaths.operation.ExerciseType;
+import tq.arxsoft.metalmaths.parsers.ExerciseParser;
+import tq.arxsoft.metalmaths.parsers.FlashParser;
+import tq.arxsoft.metalmaths.parsers.MathExerciseParser;
+import tq.arxsoft.metalmaths.parsers.SpellingParser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class MainConfiguration {
@@ -30,5 +38,16 @@ public class MainConfiguration {
     @Bean
     LessonViewHelper getLessonViewHelper() {
         return new LessonViewHelper();
+    }
+
+    @Bean
+    public Map<ExerciseType, ExerciseParser> getParsers() {
+        Map<ExerciseType, ExerciseParser> parsers = new HashMap<>();
+        parsers.put(ExerciseType.MathAnswer, new MathExerciseParser());
+        parsers.put(ExerciseType.MathInput, new MathExerciseParser());
+        parsers.put(ExerciseType.CardFlash, new FlashParser());
+        parsers.put(ExerciseType.CardSpelling, new SpellingParser());
+
+        return parsers;
     }
 }
