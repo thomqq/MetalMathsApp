@@ -1,8 +1,6 @@
 package tq.arxsoft.metalmaths.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +26,7 @@ class Mp3CacheTest {
         Mp3Cache cache = new Mp3Cache(tempDir.getPath().toString(), new IdentityUtil());
         //given
         //then
-        boolean result = cache.contain(text);
+        boolean result = cache.contain(text, "EN");
         assertEquals(true, result);
 
         Files.delete(path);
@@ -46,10 +44,10 @@ class Mp3CacheTest {
         Mp3Cache cache = new Mp3Cache(tempDir.getPath().toString(), new IdentityUtil());
 
         //given
-        cache.save(text, Files.newInputStream(path));
+        cache.save(text, Files.newInputStream(path), "EN");
 
         //then
-        boolean result = cache.contain(text);
+        boolean result = cache.contain(text, "EN");
         assertEquals(true, result);
     }
 

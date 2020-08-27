@@ -13,7 +13,6 @@ import tq.arxsoft.metalmaths.services.PollyService;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -32,12 +31,12 @@ public class AudioController {
     }
 
     @RequestMapping("/mp3Formula")
-    public void getMp3AsByttesArrays(HttpServletResponse response, @RequestParam String formula) throws IOException {
+    public void getMp3AsByttesArrays(HttpServletResponse response, @RequestParam String formula, @RequestParam(value = "lang", required = false, defaultValue = "EN") String lang) throws IOException {
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        if( !mp3Cache.contain(formula) ) {
-            mp3Cache.save(formula, pollyService.synthesize(formula, OutputFormat.Mp3));
+        if( !mp3Cache.contain(formula, lang) ) {
+            mp3Cache.save(formula, pollyService.synthesize(formula, OutputFormat.Mp3), lang);
         }
-        String pathForMp3File = mp3Cache.getPathFor(formula);
+        String pathForMp3File = mp3Cache.getPathFor(formula, lang);
         if( pathForMp3File == null) {
             throw new RuntimeException("TQ: some problem with: " + formula);
         }

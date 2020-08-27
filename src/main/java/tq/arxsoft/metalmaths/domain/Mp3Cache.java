@@ -1,9 +1,6 @@
 package tq.arxsoft.metalmaths.domain;
 
-import org.apache.catalina.util.IOTools;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,13 +22,13 @@ public class Mp3Cache {
         this.identityUtil = identityUtil;
     }
 
-    public boolean contain(String formula) {
-        return getPathFor(formula) != null;
+    public boolean contain(String formula, String lang) {
+        return getPathFor(formula, lang) != null;
     }
 
-    public void save(String formula, InputStream synthesize) {
-        String fullPathForInfoText = createFullPath(formula) + INFO_SUFFIX;
-        String fullPathForMp3 = createFullPath(formula) + FILE_SUFFIX;
+    public void save(String formula, InputStream synthesize, String lang) {
+        String fullPathForInfoText = createFullPath(formula) + "_" + lang + INFO_SUFFIX;
+        String fullPathForMp3 = createFullPath(formula) + "_" + lang + FILE_SUFFIX;
         try {
             Files.write(Paths.get(fullPathForInfoText), formula.getBytes());
             IOUtils.copy(synthesize, new FileOutputStream(fullPathForMp3));
@@ -40,8 +37,8 @@ public class Mp3Cache {
         }
     }
 
-    public String getPathFor(String formula) {
-        String fullPath = createFullPath(formula) + FILE_SUFFIX;
+    public String getPathFor(String formula, String lang) {
+        String fullPath = createFullPath(formula) + "_" +lang + FILE_SUFFIX;
         if( Files.exists(Paths.get(fullPath)) ) {
             return fullPath;
         }
